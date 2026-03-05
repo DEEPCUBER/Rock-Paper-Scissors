@@ -1,18 +1,18 @@
 # ===================================== [Rock Paper Scissors HW] ===================================== #
 
-#Solo homework project (NO TEACHER HELP ALLOWED)
+#Solo homework project (NO TEACHER HELP ALLOWED and CLANKERGPT/MICROSLOP HELP!)
 
 # ===================================== [Versions] ===================================== # 
 #Version 1: Finished up helper functions, main functions (In a skeleton), and constants 5/03/26
 #Version 2: Finished setting up functions welcome text, and instructions. (Commited to github) 5/03/26
 #Version 3: No code changes, just testing user input specifically on instructions 5/03/26
-#Version 4: Finished game logic 
+#Version 4: Finished game logic (Commited to github) 5/03/26
+#Version 5: Completed the main loop that holds everything together
 
 
-
-#Modules - These help with stuff 
-import random #Helps with randomizing the answers given from the terminal 
-import os
+#Modules - These help with stuff that is important to this game
+import random #Helps with randomizing the answers that the terminal clanker will choose form
+import os #Helps with clearing text in necessary places to make the game easier to play 
 
 # ======== Constants ======== #
 ROCK = "rock"
@@ -21,8 +21,7 @@ SCISSORS = "scissors"
 
 MOVES = (ROCK, PAPER, SCISSORS) #This constant is for the possible move options
 
-#This constant is for determining the winning rules
-WIN_RULES = {
+WIN_RULES = {    #This constant is for determining the winning rules which makes things way easier
     ROCK: SCISSORS, 
     PAPER: ROCK,
     SCISSORS: PAPER
@@ -61,19 +60,20 @@ def instructions(): # This helps the user with instructions
         print("\n Always remember, \n rock beats paper, \n paper beats scissors \n and scissors beats rock")
         print(f"\n If you win, you get 1 point, if you lose, your opponent will get 1 point and it is first to {GAMEROUNDS}!")
 
-        player_choice = input("Hey are you ready to play? Please say yes or no to start!:  ").lower().strip()
+        player_choice = input("Hey are you ready to play? Please say yes or no to start! Or press M to return to the main menu! :  ").lower().strip()
 
         if player_choice in ['yes', 'y']:
-            print("Then let us begin!")
-            return main()
+            print("THEN LET's GET READY TO RUMBLE!!!!!")
+            rps_game()
 
         elif player_choice in ['no', 'n']:
             print("Oh...... Another time then!")
             break
+        elif player_choice in ['main', 'menu', 'm']:
+            return main()
         else:
             print("sorry that's invalid, please press yes or no")
-
-        
+    
 def rps_game(): #This is the thing that handles the logic of RPS game using the constants and stuff
     terminal_gamer_score = 0
     clanker_score = 0
@@ -105,7 +105,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
 █░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
 █░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█░░░░░░░░░░░░░░█
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████""")
-    print(f" Welcome to rock, paper, scissors! It is first to {GAMEROUNDS}! If you beat the clanker you have saved earth!")
+    print(f" Welcome to rock, paper, scissors stadium! It is first to {GAMEROUNDS}! If you beat the clanker you have saved earth!")
     
     while terminal_gamer_score < GAMEROUNDS and clanker_score < GAMEROUNDS:
         player_move = input("Hey, choose rock, paper, scissors:     ")
@@ -145,12 +145,25 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         print("Oh, see you another time then as if the earth doesn't matter!")
         return False
     
-
-    
 def main(): #This is the backbone of my entire RPS game without it, I would be cooked
-    print("just testing! -AB_DEEBCODER")
-#main loop
+    welcome_text()
+    greeting_text()
+
+    while True:
+        game_choice = input("\n Welcome dear player, do you want to play the game? (yes/no) \n Press I for instructions!:   ").lower().strip()
+
+        if game_choice in ["yes", "y"]:
+            print("Let's get ready to rumble!!!!!")
+            rps_game()
+        elif game_choice in ["no", "n"]:
+            print("oh sad...... See you next time :(")
+            break
+        elif game_choice in ["instructions", "i",]:
+            instructions()
+
+        else:
+            print("Nah that's invalid..... Please use yes or no or whatever works I guess. ")
 
 
-rps_game() 
-
+#main loop that starts the game otherwise I'd be cooked
+main()
