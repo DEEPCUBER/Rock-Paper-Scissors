@@ -8,6 +8,7 @@
 #Version 3: No code changes, just testing user input specifically on instructions 5/03/26
 #Version 4: Finished game logic (Commited to github) 5/03/26
 #Version 5: Completed the main loop that holds everything together
+#Version 6: Quality of life features including clearing the terminal whenever necessary 
 
 
 #Modules - These help with stuff that is important to this game
@@ -33,6 +34,7 @@ POINTSPERWIN = 1 #This constant is for determining the amount of points per win 
 GAMEROUNDS = 3
 
 #Helper functions
+
 def clear_terminal():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -108,7 +110,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
     print(f" Welcome to rock, paper, scissors stadium! It is first to {GAMEROUNDS}! If you beat the clanker you have saved earth!")
     
     while terminal_gamer_score < GAMEROUNDS and clanker_score < GAMEROUNDS:
-        player_move = input("Hey, choose rock, paper, scissors:     ")
+        player_move = input("Hey, choose rock, paper, scissors:     ").lower().strip()
 
         if player_move not in MOVES:
             print("Nah bro, choose a move that is real")
@@ -163,7 +165,6 @@ def main(): #This is the backbone of my entire RPS game without it, I would be c
 
         else:
             print("Nah that's invalid..... Please use yes or no or whatever works I guess. ")
-
 
 #main loop that starts the game otherwise I'd be cooked
 main()
