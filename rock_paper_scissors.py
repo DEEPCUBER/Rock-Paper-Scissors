@@ -7,15 +7,16 @@
 #Version 2: Finished setting up functions welcome text, and instructions. (Commited to github) 5/03/26
 #Version 3: No code changes, just testing user input specifically on instructions 5/03/26
 #Version 4: Finished game logic (Commited to github) 5/03/26
-#Version 5: Completed the main loop that holds everything together
-#Version 6: Added some code comments so people can understand what I'm trying to do
-#Version 7: Ran into a bug with player_score variable (FIXED)
+#Version 5: Completed the main loop that holds everything together 5/03/26 added 6/03/26
+#Version 6: Added some code comments so people can understand what I'm trying to do 6/03/26
+#Version 7: Ran into a bug with player_score variable (FIXED)/(Commited to github) 6/03/26
+#Version 8: Attempting quality of life changes to the game to make it easier to play and pick up(clear_terminal) COMPLETED 6/03/26
 
-
-#Modules - These help with stuff that is important to this game
+#Modules - These help with stuff that is important to this game especially helpful stuff
 import random #Helps with randomizing the answers that the terminal clanker will choose form
 import os #Helps with clearing text in necessary places to make the game easier to play 
-
+import time #Helps the user to see response message before clearing the terminal to the task
+import string #Imports string module for a cool helper function
 # ======== Constants ======== #
 ROCK = "rock"
 PAPER = "paper"
@@ -32,13 +33,18 @@ WIN_RULES = {    #This constant is for determining the winning rules which makes
 POINTSPERWIN = 1 #This constant is for determining the amount of points per win and is modular
 GAMEROUNDS = 3 #This constant is for determining the amount of gamerounds and can be changeable for fun play!
 
-#Helper functions
+#Helper functions that help with quality of life in this program
 
 def clear_terminal(): # clearing the terminal wherever necessary so it is much easier to play the game
     os.system('cls' if os.name == 'nt' else 'clear')
 
-#Main functions
+def cleaned_input(user_input:str) -> str: #Cleans input of a user #Borrowed from another school program I made with help of teacher
+    cleaned = user_input.lower() #Uses .lower() to remove any capitals
+    cleaned = cleaned.replace(" ", "") #Removes any weird spaces
+    cleaned = cleaned.strip(string.punctuation) #Removes any unecessary punctuation
+    return cleaned #Returns result
 
+#Main functions
 def greeting_text(): #greets the terminal gamer accompanying welcome_text() 
     print("Welcome dear terminal gamer....... this is classic rock, paper, scissors")
 
@@ -62,15 +68,21 @@ def instructions(): # This helps the user with instructions
         print(f"\n If you win, you get 1 point, if you lose, your opponent will get 1 point and it is first to {GAMEROUNDS}!") #Instructions on how to win
 
         player_choice = input("Hey are you ready to play? Please say yes or no to start! Or press M to return to the main menu! :  ").lower().strip() #Asks the user if they want to start/play/return to menu
+        player_choice = cleaned_input(player_choice) 
 
         if player_choice in ['yes', 'y']:
-            print("THEN LET's GET READY TO RUMBLE!!!!!")
+            print("\n Let's go!!!!")
+            time.sleep(1)
+            clear_terminal()
             rps_game()
 
         elif player_choice in ['no', 'n']:
             print("Oh...... Another time then!")
             break
         elif player_choice in ['main', 'menu', 'm']:
+            print("Play whenever you're ready!")
+            time.sleep(1)
+            clear_terminal()
             return main()
         else:
             print("sorry that's invalid, please press yes or no")
@@ -80,90 +92,86 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
     clanker_score = 0 #Sets clanker score to zero everytime
 
     print(""" 
-███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-█░░░░░░░░░░░░░░░░███░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░███████████░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░██████████
-█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀░░███████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░██████████
-█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░███████████░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░██████████
-█░░▄▀░░████░░▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████████████░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░████░░▄▀░░██████████
-█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░░░░░▄▀░░█████████████░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░▄▀░░██████████
-█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀▄▀▄▀▄▀▄▀░░█████████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░██████████
-█░░▄▀░░░░░░▄▀░░░░███░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░░░░░▄▀░░█████████████░░▄▀░░░░░░░░░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░▄▀░░░░██████████
-█░░▄▀░░██░░▄▀░░█████░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░██░░▄▀░░███░░░░░░████░░▄▀░░█████████░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░█████████░░▄▀░░██░░▄▀░░█████░░░░░░█
-█░░▄▀░░██░░▄▀░░░░░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░█░░▄▀░░████░░▄▀░░█████████░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░░░░░█░░▄▀░░█
-█░░▄▀░░██░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀░░█░░░░░░████░░▄▀░░█████████░░▄▀░░██░░▄▀░░█░░▄▀░░█████████░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░█░░░░░░█
-█░░░░░░██░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░█████░░████░░░░░░█████████░░░░░░██░░░░░░█░░░░░░█████████░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█████░░█
-███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
-█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░░░███░░░░░░░░░░░░░░█
-█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀▄▀▄▀▄▀▄▀░░█
-█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░░░▄▀░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░░░░░░░░░█
-█░░▄▀░░█████████░░▄▀░░███████████░░▄▀░░███░░▄▀░░█████████░░▄▀░░█████████░░▄▀░░██░░▄▀░░█░░▄▀░░████░░▄▀░░███░░▄▀░░█████████
-█░░▄▀░░░░░░░░░░█░░▄▀░░███████████░░▄▀░░███░░▄▀░░░░░░░░░░█░░▄▀░░░░░░░░░░█░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░░░▄▀░░███░░▄▀░░░░░░░░░░█
-█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░███████████░░▄▀░░███░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀▄▀▄▀▄▀▄▀▄▀░░███░░▄▀▄▀▄▀▄▀▄▀░░█
-█░░░░░░░░░░▄▀░░█░░▄▀░░███████████░░▄▀░░███░░░░░░░░░░▄▀░░█░░░░░░░░░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░░░░░▄▀░░░░███░░░░░░░░░░▄▀░░█
-█████████░░▄▀░░█░░▄▀░░███████████░░▄▀░░███████████░░▄▀░░█████████░░▄▀░░█░░▄▀░░██░░▄▀░░█░░▄▀░░██░░▄▀░░█████████████░░▄▀░░█
-█░░░░░░░░░░▄▀░░█░░▄▀░░░░░░░░░░█░░░░▄▀░░░░█░░░░░░░░░░▄▀░░█░░░░░░░░░░▄▀░░█░░▄▀░░░░░░▄▀░░█░░▄▀░░██░░▄▀░░░░░░█░░░░░░░░░░▄▀░░█
-█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█░░▄▀░░██░░▄▀▄▀▄▀░░█░░▄▀▄▀▄▀▄▀▄▀░░█
-█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░░░░░░░░░█░░░░░░██░░░░░░░░░░█░░░░░░░░░░░░░░█
-█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████""")
+██████████████████████████████████████████████████████████████████████████████████████▀███████████████████████████
+█▄─▄▄▀█▄─▄▄─█─▄▄▄▄███▀▀▀▀▀████─▄─▄─█▄─▄▄─█▄─▄▄▀█▄─▀█▀─▄█▄─▄█▄─▀█▄─▄██▀▄─██▄─▄█████─▄▄▄▄██▀▄─██▄─▀█▀─▄█▄─▄▄─█▄─▄▄▀█
+██─▄─▄██─▄▄▄█▄▄▄▄─██████████████─████─▄█▀██─▄─▄██─█▄█─███─███─█▄▀─███─▀─███─██▀███─██▄─██─▀─███─█▄█─███─▄█▀██─▄─▄█
+▀▄▄▀▄▄▀▄▄▄▀▀▀▄▄▄▄▄▀▀▀▀▀▀▀▀▀▀▀▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▀▄▄▀▄▄▀▄▄▀▄▄▄▄▄▀▀▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀
+█████████████████████████████████████████████████████████████
+█▄─█─▄█─▄▄▄▄███─▄▄▄─█▄─▄████▀▄─██▄─▀█▄─▄█▄─█─▄█▄─▄▄─█▄─▄▄▀█░█
+██▄▀▄██▄▄▄▄─███─███▀██─██▀██─▀─███─█▄▀─███─▄▀███─▄█▀██─▄─▄█▄█
+▀▀▀▄▀▀▀▄▄▄▄▄▀▀▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▀ """)
     print(f" Welcome to rock, paper, scissors stadium! It is first to {GAMEROUNDS}! If you beat the clanker you have saved earth!")
     
     while terminal_gamer_score < GAMEROUNDS and clanker_score < GAMEROUNDS: #Wraps the whole game into a while loop so the game can keep going until it reaches GAMEROUNDS
-        player_move = input("Hey, choose rock, paper, scissors:     ").lower().strip()
+        player_move = input("\n Hey, choose rock, paper, scissors:     ").lower().strip()
+        player_move = cleaned_input(player_move)
 
         if player_move not in MOVES: # Asks player to choose a valid move in constant MOVES
             print("Nah bro, choose a move that is real")
             continue
 
         clanker_move = random.choice(MOVES) # This is how the clanker generates moves using the random module
-        print(f"Clanker chose: {clanker_move}")
+        print(f" \n Clanker chose:  {clanker_move}")
 
         if player_move == clanker_move: #When they both draw it won't count so it will keep playing
-            print("It's a draw! Try again")
+            print("\n It's a draw! Try again")
 
         elif WIN_RULES[player_move] == clanker_move: # If the player does a move according to constant WIN_RULES and is part of the scenarios in WIN_RULES then they score a point against the clanker
-            print("Hey, you won this round, a few more to go! :)")
+            print("\n Hey, you won this round, a few more to go! :)")
             terminal_gamer_score += 1
 
         else:
-            print("The damn clanker won this round :(") # The opposite of the player winning according to comment on line 123
+            print("\n The damn clanker won this round :(") # The opposite of the player winning according to comment on line 123
             clanker_score += 1 
 
         print(f"\n ============= Player has {terminal_gamer_score} points - Clanker has {clanker_score} points =============") # Shows the player what their score and the clanker score is
 
     if terminal_gamer_score == GAMEROUNDS: #If the player reaches the GAMEROUNDS, then the while loop is finished and displays the victory message
-        print("Hey you did it! You saved the earth from the damn clankers")
+        print("\n Hey you did it! You saved the earth from the damn clankers")
     else:
-        print("Oh no, the damn Clanker won the match! They took over earth ") #If the clanker reaches GAMEROUNDS, then the while loop is finished and displays that the clanker won
+        print("\n Oh no, the damn Clanker won the match! They took over earth ") #If the clanker reaches GAMEROUNDS, then the while loop is finished and displays that the clanker won
 
     try_again = input("\n Hey, wanna try save the earth from clankers again? (Yes/no) to respond!:      ") #Asks the player if they want to try and win against them
 
     if try_again in ["yes", "y"]: #Returns the player to main menu so they can play whenever they're ready
         print("Hey, let's try again whenever you're ready")
-        return main()
+        time.sleep(1)
+        clear_terminal()
+        return True
         
     elif try_again in ["no", "n"]: #Breaks the loop because player doesn't want to play anymore 
         print("Oh, see you another time then as if the earth doesn't matter!")
+        time.sleep(1)
+        clear_terminal()
         return False
+    else:
+        print("Sorry, that's invalid please pick a valid option")
     
 def main(): #This is the backbone of my entire RPS game without it, I would be cooked
-    welcome_text()
-    greeting_text()
-
     while True:
-        game_choice = input("\n Welcome dear player, do you want to play the game? (yes/no) \n Press I for instructions!:   ").lower().strip()
+        welcome_text()
+        greeting_text()
+    
+        game_choice = input("\n Welcome dear player, do you want to play the game? (yes/no) or press I for instructions!:   ").lower().strip()
+        game_choice = cleaned_input(game_choice)
 
         if game_choice in ["yes", "y"]:
-            print("Let's get ready to rumble!!!!!")
+            print("\n Let's get ready to rumble!!!!!")
+            time.sleep(1)
+            clear_terminal()
             rps_game()
         elif game_choice in ["no", "n"]:
-            print("oh sad...... See you next time :(")
+            print("\n oh sad...... See you next time :(")
             break
         elif game_choice in ["instructions", "i",]:
+            time.sleep(1)
+            clear_terminal()
             instructions()
 
         else:
-            print("Nah that's invalid..... Please use yes or no or whatever works I guess. ")
+            print("\n Nah that's invalid..... Please use yes or no or whatever works I guess. ")
 
 #main loop that starts the game otherwise I'd be cooked
 main()
+
+
