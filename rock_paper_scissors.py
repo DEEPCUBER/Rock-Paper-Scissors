@@ -19,6 +19,7 @@
 # ===================== 7th March, 2026 Versions ===================== # 
 #Version 12: Fixed bug with variable name
 #Version 13: Added "loading" gimmick like some games and latency when loading each round!
+#Version 14: Continuing on version 13 with some stuff I missed
 # ===================== Versions End ===================== #
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
@@ -96,6 +97,11 @@ def instructions(): # This helps the user with instructions
 
         elif player_choice in ['no', 'n']:
             print("Oh...... Another time then!")
+            time.sleep(1.5)
+            clear_terminal()
+            print("Exiting game")
+            time.sleep(1.5)
+            clear_terminal()
             exit()
         elif player_choice in ['main', 'menu', 'm']:
             print("Play whenever you're ready!")
