@@ -18,6 +18,7 @@
 #Version 11: BIG UPDATE - Finally added quick moves for player to do (check line 36 for more info) and I have made the game easier to play (through clear text ofc) 
 # ===================== 7th March, 2026 Versions ===================== # 
 #Version 12: Fixed bug with variable name
+#Version 13: Added "loading" gimmick like some games and latency when loading each round!
 # ===================== Versions End ===================== #
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
@@ -88,6 +89,9 @@ def instructions(): # This helps the user with instructions
             print("\n Let's go!!!!")
             time.sleep(1)
             clear_terminal()
+            print("Loading Game..........")
+            time.sleep(1.5)
+            clear_terminal()
             rps_game()
 
         elif player_choice in ['no', 'n']:
@@ -96,6 +100,9 @@ def instructions(): # This helps the user with instructions
         elif player_choice in ['main', 'menu', 'm']:
             print("Play whenever you're ready!")
             time.sleep(1)
+            clear_terminal()
+            print("Returning to menu......")
+            time.sleep(1.5)
             clear_terminal()
             return main()
         else:
@@ -137,17 +144,23 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         if player_move == jarvis_move: #When they both draw it won't count so it will keep playing
             print("\n It's a draw! Try again")
             time.sleep(1.5)
+            print("\n Loading Next round.............")
+            time.sleep(1.5)
             clear_terminal()
 
         elif WIN_RULES[player_move] == jarvis_move: # If the player does a move according to constant WIN_RULES and is part of the scenarios in WIN_RULES then they score a point against the clanker
             print("\n Hey, you won this round, a few more to go! :)")
             terminal_gamer_score += 1
             time.sleep(1.5)
+            print("\n Loading next round...........")
+            time.sleep(1.5)
             clear_terminal()
 
         else:
             print("\n Jarvis won this round ;)") # The opposite of the player winning according to comment on line 123
             jarvis_score += 1 
+            time.sleep(1.5)
+            print("Loading next round..........")
             time.sleep(1.5)
             clear_terminal()
 
@@ -190,22 +203,31 @@ def main(): #This is the backbone of my entire RPS game without it, I would be c
             print("\n Let's get ready to rumble!!!!!")
             time.sleep(1)
             clear_terminal()
+            print("Loading Game...............")
+            time.sleep(1.5)
+            clear_terminal()
             rps_game()
         elif game_choice in ["no", "n"]:
             print("\n oh sad...... See you next time :(")
+            time.sleep(1.5)
+            clear_terminal()
+            print("Exiting game.....")
+            time.sleep(1.5)
+            clear_terminal()
             break
         elif game_choice in ["instructions", "i",]:
             print("See ya in game!")
             time.sleep(1)
             clear_terminal()
+            print("Loading Instructions..........")
+            time.sleep(1.5)
+            clear_terminal()
             instructions()
 
         else:
             print("\n Nah that's invalid..... Please use yes or no or whatever works I guess. ")
-            time.sleep(3)
+            time.sleep(2)
             clear_terminal()
 
 #main loop that starts the game otherwise I'd be cooked
 main()
-
-
