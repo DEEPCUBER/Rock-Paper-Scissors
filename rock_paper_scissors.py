@@ -20,6 +20,7 @@
 #Version 12: Fixed bug with variable name
 #Version 13: Added "loading" gimmick like some games and latency when loading each round!
 #Version 14: Continuing on version 13 with some stuff I missed
+#Version 15: Teeny tiny update
 # ===================== Versions End ===================== #
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
@@ -90,7 +91,7 @@ def instructions(): # This helps the user with instructions
             print("\n Let's go!!!!")
             time.sleep(1)
             clear_terminal()
-            print("Loading Game..........")
+            print("          \n        \n       Loading Game...............")
             time.sleep(1.5)
             clear_terminal()
             rps_game()
@@ -99,7 +100,7 @@ def instructions(): # This helps the user with instructions
             print("Oh...... Another time then!")
             time.sleep(1.5)
             clear_terminal()
-            print("Exiting game")
+            print("          \n        \n       Exiting game........")
             time.sleep(1.5)
             clear_terminal()
             exit()
@@ -107,7 +108,7 @@ def instructions(): # This helps the user with instructions
             print("Play whenever you're ready!")
             time.sleep(1)
             clear_terminal()
-            print("Returning to menu......")
+            print("          \n        \n       Returning to menu.......")
             time.sleep(1.5)
             clear_terminal()
             return main()
@@ -127,17 +128,21 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
 █▄─█─▄█─▄▄▄▄█████▄─▄██▀▄─██▄─▄▄▀█▄─█─▄█▄─▄█─▄▄▄▄█░█
 ██▄▀▄██▄▄▄▄─███─▄█─███─▀─███─▄─▄██▄▀▄███─██▄▄▄▄─█▄█
 ▀▀▀▄▀▀▀▄▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▀▄▄▀▄▄▀▄▄▀▀▀▄▀▀▀▄▄▄▀▄▄▄▄▄▀▄▀ """)
-    print(f" Welcome to rock, paper, scissors stadium! It is first to {GAMEROUNDS}! If you beat Jarvis then you are smarter than Iron Man!")
+    print(f"\n Welcome to rock, paper, scissors stadium! It is first to {GAMEROUNDS}! If you beat Jarvis then you are smarter than Iron Man!")
     
     while terminal_gamer_score < GAMEROUNDS and jarvis_score < GAMEROUNDS: #Wraps the whole game into a while loop so the game can keep going until it reaches GAMEROUNDS
-        player_move = input("\n Hey, choose r for rock, p for paper, s for scissors:     ").lower().strip()
+        player_move = input("\n    \n          Hey, choose r for rock, p for paper, s for scissors:     ").lower().strip()
         player_move = cleaned_input(player_move)
 
         if player_move in MOVE_CONDITIONS:
             player_move = MOVE_CONDITIONS[player_move]
 
         else:
-            print("\n Nah bro, choose a move that is real")
+            print("\n          Nah bro, choose a move that is real")
+            time.sleep(1.5)
+            print("          \n            \n       Try Again......")
+            time.sleep(1.5)
+            clear_terminal()
             continue
 
         if player_move not in MOVES: # Asks player to choose a valid move in constant MOVES
@@ -207,10 +212,10 @@ def main(): #This is the backbone of my entire RPS game without it, I would be c
         game_choice = cleaned_input(game_choice)
 
         if game_choice in ["yes", "y"]:
-            print("\n Let's get ready to rumble!!!!!")
+            print("\n               \n     Let's get ready to rumble!!!!!")
             time.sleep(1)
             clear_terminal()
-            print("Loading Game...............")
+            print("          \n        \n       Loading Game...............")
             time.sleep(1.5)
             clear_terminal()
             rps_game()
@@ -218,7 +223,7 @@ def main(): #This is the backbone of my entire RPS game without it, I would be c
             print("\n oh sad...... See you next time :(")
             time.sleep(1.5)
             clear_terminal()
-            print("Exiting game.....")
+            print("          \n         \n       Exiting game.....")
             time.sleep(1.5)
             clear_terminal()
             break
@@ -226,7 +231,7 @@ def main(): #This is the backbone of my entire RPS game without it, I would be c
             print("See ya in game!")
             time.sleep(1)
             clear_terminal()
-            print("Loading Instructions..........")
+            print("          \n          \n      Loading Instructions..........")
             time.sleep(1.5)
             clear_terminal()
             instructions()
