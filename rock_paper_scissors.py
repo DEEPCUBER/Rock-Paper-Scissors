@@ -8,7 +8,8 @@
 #Version 3: No code changes, just testing user input specifically on instructions 5/03/26
 #Version 4: Finished game logic (Commited to github) 5/03/26
 #Version 5: Completed the main loop that holds everything together
-#Version 6: Quality of life features including clearing the terminal whenever necessary 
+#Version 6: Added some code comments so people can understand what I'm trying to do
+#Version 7: Ran into a bug with player_score variable (FIXED)
 
 
 #Modules - These help with stuff that is important to this game
@@ -20,7 +21,7 @@ ROCK = "rock"
 PAPER = "paper"
 SCISSORS = "scissors"
 
-MOVES = (ROCK, PAPER, SCISSORS) #This constant is for the possible move options
+MOVES = (ROCK, PAPER, SCISSORS) #This constant is for the possible move options and how the terminal uses the random import to do a move
 
 WIN_RULES = {    #This constant is for determining the winning rules which makes things way easier
     ROCK: SCISSORS, 
@@ -29,13 +30,11 @@ WIN_RULES = {    #This constant is for determining the winning rules which makes
 }
 
 POINTSPERWIN = 1 #This constant is for determining the amount of points per win and is modular
-
-#This constant is for determining the amount of gamerounds and can be changeable for fun play!
-GAMEROUNDS = 3
+GAMEROUNDS = 3 #This constant is for determining the amount of gamerounds and can be changeable for fun play!
 
 #Helper functions
 
-def clear_terminal():
+def clear_terminal(): # clearing the terminal wherever necessary so it is much easier to play the game
     os.system('cls' if os.name == 'nt' else 'clear')
 
 #Main functions
@@ -56,13 +55,13 @@ def welcome_text(): #Welcomes the user into the rock, paper, scissors game using
 """)
 
 def instructions(): # This helps the user with instructions
-    while True:
-        print("Wow, I thought everyone knew this game but very well!")
-        print("\n Type rock, paper, or scissors as your options")
-        print("\n Always remember, \n rock beats paper, \n paper beats scissors \n and scissors beats rock")
-        print(f"\n If you win, you get 1 point, if you lose, your opponent will get 1 point and it is first to {GAMEROUNDS}!")
+    while True: #Wraps the instructions menu into a while true loop
+        print("Wow, I thought everyone knew this game but very well!") #Instructions
+        print("\n Type rock, paper, or scissors as your options") #Instructions
+        print("\n Always remember, \n rock beats paper, \n paper beats scissors \n and scissors beats rock") #Instructions
+        print(f"\n If you win, you get 1 point, if you lose, your opponent will get 1 point and it is first to {GAMEROUNDS}!") #Instructions on how to win
 
-        player_choice = input("Hey are you ready to play? Please say yes or no to start! Or press M to return to the main menu! :  ").lower().strip()
+        player_choice = input("Hey are you ready to play? Please say yes or no to start! Or press M to return to the main menu! :  ").lower().strip() #Asks the user if they want to start/play/return to menu
 
         if player_choice in ['yes', 'y']:
             print("THEN LET's GET READY TO RUMBLE!!!!!")
@@ -77,8 +76,8 @@ def instructions(): # This helps the user with instructions
             print("sorry that's invalid, please press yes or no")
     
 def rps_game(): #This is the thing that handles the logic of RPS game using the constants and stuff
-    terminal_gamer_score = 0
-    clanker_score = 0
+    terminal_gamer_score = 0 #Sets the player's score to zero every time
+    clanker_score = 0 #Sets clanker score to zero everytime
 
     print(""" 
 ███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████
@@ -109,41 +108,41 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
 █████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████""")
     print(f" Welcome to rock, paper, scissors stadium! It is first to {GAMEROUNDS}! If you beat the clanker you have saved earth!")
     
-    while terminal_gamer_score < GAMEROUNDS and clanker_score < GAMEROUNDS:
+    while terminal_gamer_score < GAMEROUNDS and clanker_score < GAMEROUNDS: #Wraps the whole game into a while loop so the game can keep going until it reaches GAMEROUNDS
         player_move = input("Hey, choose rock, paper, scissors:     ").lower().strip()
 
-        if player_move not in MOVES:
+        if player_move not in MOVES: # Asks player to choose a valid move in constant MOVES
             print("Nah bro, choose a move that is real")
             continue
 
-        clanker_move = random.choice(MOVES)
+        clanker_move = random.choice(MOVES) # This is how the clanker generates moves using the random module
         print(f"Clanker chose: {clanker_move}")
 
-        if player_move == clanker_move:
+        if player_move == clanker_move: #When they both draw it won't count so it will keep playing
             print("It's a draw! Try again")
 
-        elif WIN_RULES[player_move] == clanker_move:
+        elif WIN_RULES[player_move] == clanker_move: # If the player does a move according to constant WIN_RULES and is part of the scenarios in WIN_RULES then they score a point against the clanker
             print("Hey, you won this round, a few more to go! :)")
-            player_score += 1
+            terminal_gamer_score += 1
 
         else:
-            print("The damn clanker won this round :(")
+            print("The damn clanker won this round :(") # The opposite of the player winning according to comment on line 123
             clanker_score += 1 
 
-        print(f"\n ============= Player has {terminal_gamer_score} points - Clanker has {clanker_score} points =============")
+        print(f"\n ============= Player has {terminal_gamer_score} points - Clanker has {clanker_score} points =============") # Shows the player what their score and the clanker score is
 
-    if terminal_gamer_score == GAMEROUNDS:
+    if terminal_gamer_score == GAMEROUNDS: #If the player reaches the GAMEROUNDS, then the while loop is finished and displays the victory message
         print("Hey you did it! You saved the earth from the damn clankers")
     else:
-        print("Oh no, the damn Clanker won the match! They took over earth ")
+        print("Oh no, the damn Clanker won the match! They took over earth ") #If the clanker reaches GAMEROUNDS, then the while loop is finished and displays that the clanker won
 
-    try_again = input("\n Hey, wanna try save the earth from clankers again? (Yes/no) to respond!:      ")
+    try_again = input("\n Hey, wanna try save the earth from clankers again? (Yes/no) to respond!:      ") #Asks the player if they want to try and win against them
 
-    if try_again in ["yes", "y"]:
+    if try_again in ["yes", "y"]: #Returns the player to main menu so they can play whenever they're ready
         print("Hey, let's try again whenever you're ready")
         return main()
         
-    elif try_again in ["no", "n"]:
+    elif try_again in ["no", "n"]: #Breaks the loop because player doesn't want to play anymore 
         print("Oh, see you another time then as if the earth doesn't matter!")
         return False
     
