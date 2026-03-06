@@ -21,6 +21,7 @@
 #Version 13: Added "loading" gimmick like some games and latency when loading each round!
 #Version 14: Continuing on version 13 with some stuff I missed
 #Version 15: Teeny tiny update
+#Version 16: Another teeny tiny update
 # ===================== Versions End ===================== #
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
@@ -131,7 +132,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
     print(f"\n Welcome to rock, paper, scissors stadium! It is first to {GAMEROUNDS}! If you beat Jarvis then you are smarter than Iron Man!")
     
     while terminal_gamer_score < GAMEROUNDS and jarvis_score < GAMEROUNDS: #Wraps the whole game into a while loop so the game can keep going until it reaches GAMEROUNDS
-        player_move = input("\n    \n          Hey, choose r for rock, p for paper, s for scissors:     ").lower().strip()
+        player_move = input(" \n Hey, choose r for rock, p for paper, s for scissors:     ").lower().strip()
         player_move = cleaned_input(player_move)
 
         if player_move in MOVE_CONDITIONS:
@@ -171,7 +172,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
             print("\n Jarvis won this round ;)") # The opposite of the player winning according to comment on line 123
             jarvis_score += 1 
             time.sleep(1.5)
-            print("Loading next round..........")
+            print("\n Loading next round..........")
             time.sleep(1.5)
             clear_terminal()
 
@@ -194,14 +195,14 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         return True
         
     elif try_again in ["no", "n"]: #Breaks the loop because player doesn't want to play anymore 
-        print("Oh, Jarvis can play whenever you are around")
+        print("\n Oh, Jarvis can play whenever you are around")
         time.sleep(3)
-        print("Returning to menu....................")
+        print("\n Returning to menu....................")
         time.sleep(3)
         clear_terminal()
         return False
     else:
-        print("Sorry, that's invalid please pick a valid option")
+        print("\n Sorry, that's invalid please pick a valid option")
     
 def main(): #This is the backbone of my entire RPS game without it, I would be cooked
     while True:
