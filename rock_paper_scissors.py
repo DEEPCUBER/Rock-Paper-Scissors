@@ -16,6 +16,8 @@
 #Version 9: Added a terminal response message before heading to instructions (forgot I deleted it) 6/03/26
 #Version 10: Teeny Tiny change line 72 added a space to input message 
 #Version 11: BIG UPDATE - Finally added quick moves for player to do (check line 36 for more info) and I have made the game easier to play (through clear text ofc) 
+# ===================== 7th March, 2026 Versions ===================== # 
+#Version 12: Fixed bug with variable name
 # ===================== Versions End ===================== #
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
@@ -145,7 +147,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
 
         else:
             print("\n Jarvis won this round ;)") # The opposite of the player winning according to comment on line 123
-            jarvis_score_score += 1 
+            jarvis_score += 1 
             time.sleep(1.5)
             clear_terminal()
 
@@ -200,6 +202,8 @@ def main(): #This is the backbone of my entire RPS game without it, I would be c
 
         else:
             print("\n Nah that's invalid..... Please use yes or no or whatever works I guess. ")
+            time.sleep(3)
+            clear_terminal()
 
 #main loop that starts the game otherwise I'd be cooked
 main()
