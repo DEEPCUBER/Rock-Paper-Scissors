@@ -1,4 +1,7 @@
 # Rock, Paper, Scissors
+
+BIG SHOUT OUT TO MY DAD FOR SUGGESTING FEEDBACK ON THIS GAME I WOULDN'T HAVE IMPROVED IT WITHOUT HIM!!!!!!
+
 This is my homework project which is about rock, paper, and scissors game in a terminal-based python game
 Thanks to T.Smith for helping me and everyone else in our 11DTG class to learn python programming
 This will be the project where I will lock in for this one

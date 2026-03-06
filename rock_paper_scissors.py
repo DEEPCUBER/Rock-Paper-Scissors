@@ -12,7 +12,8 @@
 #Version 7: Ran into a bug with player_score variable (FIXED)/(Commited to github) 6/03/26
 #Version 8: Attempting quality of life changes to the game to make it easier to play and pick up(clear_terminal) COMPLETED 6/03/26 (COMMITED TO GITHUB)
 #Version 9: Added a terminal response message before heading to instructions (forgot I deleted it)
-#Version 10: Teeny Tiny change line 72 added a space to input message
+#Version 10: Teeny Tiny change line 72 added a space to input message 
+#Version 11: BIG UPDATE - Finally added quick moves for player to do (check line 36 for more info) and I have made the game easier to play (through clear text ofc) 
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
 import random #Helps with randomizing the answers that the terminal clanker will choose form
@@ -30,6 +31,12 @@ WIN_RULES = {    #This constant is for determining the winning rules which makes
     ROCK: SCISSORS, 
     PAPER: ROCK,
     SCISSORS: PAPER
+}
+
+MOVE_CONDITIONS = { #Makes it so that the player can quick press the letter that corresponds to the move (LES GO I FINALLY FIGURED IT OUT)
+    "r": ROCK,
+    "p": PAPER,
+    "s": SCISSORS
 }
 
 POINTSPERWIN = 1 #This constant is for determining the amount of points per win and is modular
@@ -108,8 +115,15 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         player_move = input("\n Hey, choose rock, paper, scissors:     ").lower().strip()
         player_move = cleaned_input(player_move)
 
+        if player_move in MOVE_CONDITIONS:
+            player_move = MOVE_CONDITIONS[player_move]
+
+        else:
+            print("\n Nah bro, choose a move that is real")
+            continue
+
         if player_move not in MOVES: # Asks player to choose a valid move in constant MOVES
-            print("Nah bro, choose a move that is real")
+            print("\n Nah bro, choose a move that is real")
             continue
 
         clanker_move = random.choice(MOVES) # This is how the clanker generates moves using the random module
@@ -121,10 +135,14 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         elif WIN_RULES[player_move] == clanker_move: # If the player does a move according to constant WIN_RULES and is part of the scenarios in WIN_RULES then they score a point against the clanker
             print("\n Hey, you won this round, a few more to go! :)")
             terminal_gamer_score += 1
+            time.sleep(1.5)
+            clear_terminal()
 
         else:
             print("\n The damn clanker won this round :(") # The opposite of the player winning according to comment on line 123
             clanker_score += 1 
+            time.sleep(1.5)
+            clear_terminal()
 
         print(f"\n ============= Player has {terminal_gamer_score} points - Clanker has {clanker_score} points =============") # Shows the player what their score and the clanker score is
 
@@ -143,7 +161,8 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         
     elif try_again in ["no", "n"]: #Breaks the loop because player doesn't want to play anymore 
         print("Oh, see you another time then as if the earth doesn't matter!")
-        time.sleep(1)
+        time.sleep(3)
+        print("Returning to menu....................")
         clear_terminal()
         return False
     else:
