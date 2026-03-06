@@ -172,6 +172,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         print("\n Jarvis won this game,") #If the clanker reaches GAMEROUNDS, then the while loop is finished and displays that the clanker won
 
     try_again = input("\n Hey, wanna try beat Jarvis again (Yes/no) to respond!:      ") #Asks the player if they want to try and win against them
+    try_again = cleaned_input(try_again)
 
     if try_again in ["yes", "y"]: #Returns the player to main menu so they can play whenever they're ready
         print("Hey, let's try again whenever you're ready")
