@@ -12,6 +12,7 @@
 #Version 7: Ran into a bug with player_score variable (FIXED)/(Commited to github) 6/03/26
 #Version 8: Attempting quality of life changes to the game to make it easier to play and pick up(clear_terminal) COMPLETED 6/03/26 (COMMITED TO GITHUB)
 #Version 9: Added a terminal response message before heading to instructions (forgot I deleted it)
+#Version 10: Teeny Tiny change line 72 added a space to input message
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
 import random #Helps with randomizing the answers that the terminal clanker will choose form
@@ -68,7 +69,7 @@ def instructions(): # This helps the user with instructions
         print("\n Always remember, \n rock beats paper, \n paper beats scissors \n and scissors beats rock") #Instructions
         print(f"\n If you win, you get 1 point, if you lose, your opponent will get 1 point and it is first to {GAMEROUNDS}!") #Instructions on how to win
 
-        player_choice = input("Hey are you ready to play? Please say yes or no to start! Or press M to return to the main menu! :  ").lower().strip() #Asks the user if they want to start/play/return to menu
+        player_choice = input("\n Hey are you ready to play? Please say yes or no to start! Or press M to return to the main menu! :  ").lower().strip() #Asks the user if they want to start/play/return to menu
         player_choice = cleaned_input(player_choice) 
 
         if player_choice in ['yes', 'y']:
