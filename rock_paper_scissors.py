@@ -3,17 +3,20 @@
 #Solo homework project (NO TEACHER HELP ALLOWED and CLANKERGPT/MICROSLOP HELP!)
 
 # ===================================== [Versions] ===================================== # 
-#Version 1: Finished up helper functions, main functions (In a skeleton), and constants 5/03/26
-#Version 2: Finished setting up functions welcome text, and instructions. (Commited to github) 5/03/26
-#Version 3: No code changes, just testing user input specifically on instructions 5/03/26
-#Version 4: Finished game logic (Commited to github) 5/03/26
+# ===================== 5th March, 2026 Versions ===================== #
+#Version 1: Finished up helper functions, main functions (In a skeleton), and constants 
+#Version 2: Finished setting up functions welcome text, and instructions. (Commited to github) 
+#Version 3: No code changes, just testing user input specifically on instructions 
+#Version 4: Finished game logic (Commited to github) 
 #Version 5: Completed the main loop that holds everything together 5/03/26 added 6/03/26
+# ===================== 6th March, 2026 Versions ===================== #
 #Version 6: Added some code comments so people can understand what I'm trying to do 6/03/26
 #Version 7: Ran into a bug with player_score variable (FIXED)/(Commited to github) 6/03/26
 #Version 8: Attempting quality of life changes to the game to make it easier to play and pick up(clear_terminal) COMPLETED 6/03/26 (COMMITED TO GITHUB)
-#Version 9: Added a terminal response message before heading to instructions (forgot I deleted it)
+#Version 9: Added a terminal response message before heading to instructions (forgot I deleted it) 6/03/26
 #Version 10: Teeny Tiny change line 72 added a space to input message 
 #Version 11: BIG UPDATE - Finally added quick moves for player to do (check line 36 for more info) and I have made the game easier to play (through clear text ofc) 
+# ===================== Versions End ===================== #
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
 import random #Helps with randomizing the answers that the terminal clanker will choose form
@@ -131,6 +134,8 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
 
         if player_move == clanker_move: #When they both draw it won't count so it will keep playing
             print("\n It's a draw! Try again")
+            time.sleep(1.5)
+            clear_terminal()
 
         elif WIN_RULES[player_move] == clanker_move: # If the player does a move according to constant WIN_RULES and is part of the scenarios in WIN_RULES then they score a point against the clanker
             print("\n Hey, you won this round, a few more to go! :)")
@@ -156,6 +161,8 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
     if try_again in ["yes", "y"]: #Returns the player to main menu so they can play whenever they're ready
         print("Hey, let's try again whenever you're ready")
         time.sleep(1)
+        print("Returning to menu........")
+        time.sleep(2)
         clear_terminal()
         return True
         
@@ -163,6 +170,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         print("Oh, see you another time then as if the earth doesn't matter!")
         time.sleep(3)
         print("Returning to menu....................")
+        time.sleep(3)
         clear_terminal()
         return False
     else:
