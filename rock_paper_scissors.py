@@ -43,7 +43,7 @@ MOVE_CONDITIONS = { #Makes it so that the player can quick press the letter that
 }
 
 POINTSPERWIN = 1 #This constant is for determining the amount of points per win and is modular
-GAMEROUNDS = 3 #This constant is for determining the amount of gamerounds and can be changeable for fun play!
+GAMEROUNDS = 5 #This constant is for determining the amount of gamerounds and can be changeable for fun play!
 
 #Helper functions that help with quality of life in this program
 
@@ -75,7 +75,7 @@ def welcome_text(): #Welcomes the user into the rock, paper, scissors game using
 def instructions(): # This helps the user with instructions
     while True: #Wraps the instructions menu into a while true loop
         print("Wow, I thought everyone knew this game but very well!") #Instructions
-        print("\n Type rock, paper, or scissors as your options") #Instructions
+        print("\n Type: \n r for rock, \n p for paper, \n s for scissors as your options") #Instructions
         print("\n Always remember, \n rock beats paper, \n paper beats scissors \n and scissors beats rock") #Instructions
         print(f"\n If you win, you get 1 point, if you lose, your opponent will get 1 point and it is first to {GAMEROUNDS}!") #Instructions on how to win
 
@@ -90,7 +90,7 @@ def instructions(): # This helps the user with instructions
 
         elif player_choice in ['no', 'n']:
             print("Oh...... Another time then!")
-            break
+            exit()
         elif player_choice in ['main', 'menu', 'm']:
             print("Play whenever you're ready!")
             time.sleep(1)
@@ -101,21 +101,21 @@ def instructions(): # This helps the user with instructions
     
 def rps_game(): #This is the thing that handles the logic of RPS game using the constants and stuff
     terminal_gamer_score = 0 #Sets the player's score to zero every time
-    clanker_score = 0 #Sets clanker score to zero everytime
+    jarvis_score = 0 #Sets clanker score to zero everytime
 
     print(""" 
 ██████████████████████████████████████████████████████████████████████████████████████▀███████████████████████████
 █▄─▄▄▀█▄─▄▄─█─▄▄▄▄███▀▀▀▀▀████─▄─▄─█▄─▄▄─█▄─▄▄▀█▄─▀█▀─▄█▄─▄█▄─▀█▄─▄██▀▄─██▄─▄█████─▄▄▄▄██▀▄─██▄─▀█▀─▄█▄─▄▄─█▄─▄▄▀█
 ██─▄─▄██─▄▄▄█▄▄▄▄─██████████████─████─▄█▀██─▄─▄██─█▄█─███─███─█▄▀─███─▀─███─██▀███─██▄─██─▀─███─█▄█─███─▄█▀██─▄─▄█
 ▀▄▄▀▄▄▀▄▄▄▀▀▀▄▄▄▄▄▀▀▀▀▀▀▀▀▀▀▀▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▄▄▄▀▀▄▄▀▄▄▀▄▄▀▄▄▄▄▄▀▀▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀
-█████████████████████████████████████████████████████████████
-█▄─█─▄█─▄▄▄▄███─▄▄▄─█▄─▄████▀▄─██▄─▀█▄─▄█▄─█─▄█▄─▄▄─█▄─▄▄▀█░█
-██▄▀▄██▄▄▄▄─███─███▀██─██▀██─▀─███─█▄▀─███─▄▀███─▄█▀██─▄─▄█▄█
-▀▀▀▄▀▀▀▄▄▄▄▄▀▀▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀▄▄▀▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▀ """)
-    print(f" Welcome to rock, paper, scissors stadium! It is first to {GAMEROUNDS}! If you beat the clanker you have saved earth!")
+███████████████████████████████████████████████████
+█▄─█─▄█─▄▄▄▄█████▄─▄██▀▄─██▄─▄▄▀█▄─█─▄█▄─▄█─▄▄▄▄█░█
+██▄▀▄██▄▄▄▄─███─▄█─███─▀─███─▄─▄██▄▀▄███─██▄▄▄▄─█▄█
+▀▀▀▄▀▀▀▄▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▀▄▄▀▄▄▀▄▄▀▀▀▄▀▀▀▄▄▄▀▄▄▄▄▄▀▄▀ """)
+    print(f" Welcome to rock, paper, scissors stadium! It is first to {GAMEROUNDS}! If you beat Jarvis then you are smarter than Iron Man!")
     
-    while terminal_gamer_score < GAMEROUNDS and clanker_score < GAMEROUNDS: #Wraps the whole game into a while loop so the game can keep going until it reaches GAMEROUNDS
-        player_move = input("\n Hey, choose rock, paper, scissors:     ").lower().strip()
+    while terminal_gamer_score < GAMEROUNDS and jarvis_score < GAMEROUNDS: #Wraps the whole game into a while loop so the game can keep going until it reaches GAMEROUNDS
+        player_move = input("\n Hey, choose r for rock, p for paper, s for scissors:     ").lower().strip()
         player_move = cleaned_input(player_move)
 
         if player_move in MOVE_CONDITIONS:
@@ -129,34 +129,34 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
             print("\n Nah bro, choose a move that is real")
             continue
 
-        clanker_move = random.choice(MOVES) # This is how the clanker generates moves using the random module
-        print(f" \n Clanker chose:  {clanker_move}")
+        jarvis_move = random.choice(MOVES) # This is how the clanker generates moves using the random module
+        print(f" \n Jarvis chose:  {jarvis_move}")
 
-        if player_move == clanker_move: #When they both draw it won't count so it will keep playing
+        if player_move == jarvis_move: #When they both draw it won't count so it will keep playing
             print("\n It's a draw! Try again")
             time.sleep(1.5)
             clear_terminal()
 
-        elif WIN_RULES[player_move] == clanker_move: # If the player does a move according to constant WIN_RULES and is part of the scenarios in WIN_RULES then they score a point against the clanker
+        elif WIN_RULES[player_move] == jarvis_move: # If the player does a move according to constant WIN_RULES and is part of the scenarios in WIN_RULES then they score a point against the clanker
             print("\n Hey, you won this round, a few more to go! :)")
             terminal_gamer_score += 1
             time.sleep(1.5)
             clear_terminal()
 
         else:
-            print("\n The damn clanker won this round :(") # The opposite of the player winning according to comment on line 123
-            clanker_score += 1 
+            print("\n Jarvis won this round ;)") # The opposite of the player winning according to comment on line 123
+            jarvis_score_score += 1 
             time.sleep(1.5)
             clear_terminal()
 
-        print(f"\n ============= Player has {terminal_gamer_score} points - Clanker has {clanker_score} points =============") # Shows the player what their score and the clanker score is
+        print(f"\n ============= Player has {terminal_gamer_score} points - Jarvis has {jarvis_score} points =============") # Shows the player what their score and the clanker score is
 
     if terminal_gamer_score == GAMEROUNDS: #If the player reaches the GAMEROUNDS, then the while loop is finished and displays the victory message
-        print("\n Hey you did it! You saved the earth from the damn clankers")
+        print("\n Hey you did it! You are smarter than Jarvis and Iron Man :)")
     else:
-        print("\n Oh no, the damn Clanker won the match! They took over earth ") #If the clanker reaches GAMEROUNDS, then the while loop is finished and displays that the clanker won
+        print("\n Jarvis won this game,") #If the clanker reaches GAMEROUNDS, then the while loop is finished and displays that the clanker won
 
-    try_again = input("\n Hey, wanna try save the earth from clankers again? (Yes/no) to respond!:      ") #Asks the player if they want to try and win against them
+    try_again = input("\n Hey, wanna try beat Jarvis again (Yes/no) to respond!:      ") #Asks the player if they want to try and win against them
 
     if try_again in ["yes", "y"]: #Returns the player to main menu so they can play whenever they're ready
         print("Hey, let's try again whenever you're ready")
@@ -167,7 +167,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         return True
         
     elif try_again in ["no", "n"]: #Breaks the loop because player doesn't want to play anymore 
-        print("Oh, see you another time then as if the earth doesn't matter!")
+        print("Oh, Jarvis can play whenever you are around")
         time.sleep(3)
         print("Returning to menu....................")
         time.sleep(3)
