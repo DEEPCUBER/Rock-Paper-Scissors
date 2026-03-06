@@ -10,7 +10,8 @@
 #Version 5: Completed the main loop that holds everything together 5/03/26 added 6/03/26
 #Version 6: Added some code comments so people can understand what I'm trying to do 6/03/26
 #Version 7: Ran into a bug with player_score variable (FIXED)/(Commited to github) 6/03/26
-#Version 8: Attempting quality of life changes to the game to make it easier to play and pick up(clear_terminal) COMPLETED 6/03/26
+#Version 8: Attempting quality of life changes to the game to make it easier to play and pick up(clear_terminal) COMPLETED 6/03/26 (COMMITED TO GITHUB)
+#Version 9: Added a terminal response message before heading to instructions (forgot I deleted it)
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
 import random #Helps with randomizing the answers that the terminal clanker will choose form
@@ -164,6 +165,7 @@ def main(): #This is the backbone of my entire RPS game without it, I would be c
             print("\n oh sad...... See you next time :(")
             break
         elif game_choice in ["instructions", "i",]:
+            print("See ya in game!")
             time.sleep(1)
             clear_terminal()
             instructions()
