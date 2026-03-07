@@ -1,6 +1,8 @@
 # Rock, Paper, Scissors
 Versions started cluttering up space so I decided to move them all here :0
 
+VIEW MY VERSION HISTORY HERE OF CREATING THIS PROGRAM!
+
 # ===================================== [Versions] ===================================== # 
 # ===================== 5th March, 2026 Versions ===================== #
 #Version 1: Finished up helper functions, main functions (In a skeleton), and constants 
