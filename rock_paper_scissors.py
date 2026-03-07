@@ -22,7 +22,8 @@
 #Version 14: Continuing on version 13 with some stuff I missed
 #Version 15: Teeny tiny update
 #Version 16: Another teeny tiny update
-#Version 17: Attempt of making the move rock available with r (For rock)
+#Version 17: Attempt of making the move rock available with r (For rock etc) Les go I did it!
+#Version 18: Added a victory and losing animation
 # ===================== Versions End ===================== #
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
@@ -67,6 +68,42 @@ def cleaned_input(user_input:str) -> str: #Cleans input of a user #Borrowed from
     return cleaned #Returns result
 
 #Main functions
+def victory_animation():
+    print("\nYOU WON!")
+    time.sleep(0.5)
+    clear_terminal()
+    print("\nyou won!")
+    time.sleep(0.5)
+    clear_terminal()
+    print("\nYOU WON!")
+    time.sleep(0.5)
+    clear_terminal()
+    print("\nyou won!")
+    time.sleep(0.5)
+    clear_terminal()
+    print("\nYOU WON!")
+    time.sleep(0.5)
+    clear_terminal() 
+    print("\nyou won!") 
+ 
+def loss_animation():
+    print("\nYOU LOST :|")
+    time.sleep(0.5)
+    clear_terminal()
+    print("\nyou lost :(")
+    time.sleep(0.5)
+    clear_terminal()
+    print("\nYOU LOST :|")
+    time.sleep(0.5)
+    clear_terminal()
+    print("\nyou lost :(")
+    time.sleep(0.5)
+    clear_terminal()
+    print("\nYOU LOST :|")
+    time.sleep(0.5)
+    clear_terminal()  
+    print("\nyou lost :(") 
+
 def greeting_text(): #greets the terminal gamer accompanying welcome_text() 
     print("Welcome dear terminal gamer....... this is classic rock, paper, scissors")
 
@@ -184,8 +221,12 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
 
     if terminal_gamer_score == GAMEROUNDS: #If the player reaches the GAMEROUNDS, then the while loop is finished and displays the victory message
         print("\n Hey you did it! You beat Jarvis! :)")
+        time.sleep(2)
+        victory_animation()
     else:
-        print("\n Jarvis won this game,") #If Jarvis reaches GAMEROUNDS, then the while loop is finished and displays that the clanker won
+        print("\n Jarvis won this game,") #If Jarvis reaches GAMEROUNDS, then the while loop is finished and displays that Jarvis won
+        time.sleep(2)
+        loss_animation()
 
     try_again = input("\n Hey, wanna try beat Jarvis again (Yes/no) to respond!:      ") #Asks the player if they want to try and win against them
     try_again = cleaned_input(try_again)
@@ -247,4 +288,5 @@ def main(): #This is the backbone of my entire RPS game without it, I would be c
             clear_terminal()
 
 #main loop that starts the game otherwise I'd be cooked
+
 main()
