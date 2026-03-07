@@ -2,33 +2,11 @@
 
 #Solo homework project (NO TEACHER HELP ALLOWED and CLANKERGPT/MICROSLOP HELP!)
 
-# ===================================== [Versions] ===================================== # 
-# ===================== 5th March, 2026 Versions ===================== #
-#Version 1: Finished up helper functions, main functions (In a skeleton), and constants 
-#Version 2: Finished setting up functions welcome text, and instructions. (Commited to github) 
-#Version 3: No code changes, just testing user input specifically on instructions 
-#Version 4: Finished game logic (Commited to github) 
-#Version 5: Completed the main loop that holds everything together 5/03/26 added 6/03/26
-# ===================== 6th March, 2026 Versions ===================== #
-#Version 6: Added some code comments so people can understand what I'm trying to do 6/03/26
-#Version 7: Ran into a bug with player_score variable (FIXED)/(Commited to github) 6/03/26
-#Version 8: Attempting quality of life changes to the game to make it easier to play and pick up(clear_terminal) COMPLETED 6/03/26 (COMMITED TO GITHUB)
-#Version 9: Added a terminal response message before heading to instructions (forgot I deleted it) 6/03/26
-#Version 10: Teeny Tiny change line 72 added a space to input message 
-#Version 11: BIG UPDATE - Finally added quick moves for player to do (check line 36 for more info) and I have made the game easier to play (through clear text ofc) 
-# ===================== 7th March, 2026 Versions ===================== # 
-#Version 12: Fixed bug with variable name
-#Version 13: Added "loading" gimmick like some games and latency when loading each round!
-#Version 14: Continuing on version 13 with some stuff I missed
-#Version 15: Teeny tiny update
-#Version 16: Another teeny tiny update
-#Version 17: Attempt of making the move rock available with r (For rock etc) Les go I did it!
-#Version 18: Added a victory and losing animation
-# ===================== Versions End ===================== #
+#Versions are available in Versions.md on the GITHUB page!
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
 import random #Helps with randomizing the answers that the terminal clanker will choose form
-import os #Helps with clearing text in necessary places to make the game easier to play 
+import os #Helps with clearing text in necessary places to make the game easier to see without being cluttered
 import time #Helps the user to see response message before clearing the terminal to the task
 import string #Imports string module for a cool helper function
 # ======== Constants ======== #
@@ -67,8 +45,9 @@ def cleaned_input(user_input:str) -> str: #Cleans input of a user #Borrowed from
     cleaned = cleaned.strip(string.punctuation) #Removes any unecessary punctuation
     return cleaned #Returns result
 
-#Main functions
-def victory_animation():
+#Animation Functions
+
+def victory_animation(): #Displays an 'animation' of the player winning the game
     print("\nYOU WON!")
     time.sleep(0.5)
     clear_terminal()
@@ -86,7 +65,7 @@ def victory_animation():
     clear_terminal() 
     print("\nyou won!") 
  
-def loss_animation():
+def loss_animation(): #Displays an 'animation' of the player losing the game
     print("\nYOU LOST :|")
     time.sleep(0.5)
     clear_terminal()
@@ -103,6 +82,9 @@ def loss_animation():
     time.sleep(0.5)
     clear_terminal()  
     print("\nyou lost :(") 
+
+
+#Main functions
 
 def greeting_text(): #greets the terminal gamer accompanying welcome_text() 
     print("Welcome dear terminal gamer....... this is classic rock, paper, scissors")
@@ -129,7 +111,7 @@ def instructions(): # This helps the user with instructions
         player_choice = input("\n Hey are you ready to play? Please say yes or no to start! Or press M to return to the main menu! :  ").lower().strip() #Asks the user if they want to start/play/return to menu
         player_choice = cleaned_input(player_choice) 
 
-        if player_choice in ['yes', 'y']:
+        if player_choice in ['yes', 'y']: #If user's choice is yes or y it will load the game
             print("\n Let's go!!!!")
             time.sleep(1)
             clear_terminal()
@@ -138,7 +120,7 @@ def instructions(): # This helps the user with instructions
             clear_terminal()
             rps_game()
 
-        elif player_choice in ['no', 'n']:
+        elif player_choice in ['no', 'n']: #If user's choice is in no or n then it will exit the program
             print("Oh...... Another time then!")
             time.sleep(1.5)
             clear_terminal()
@@ -146,7 +128,7 @@ def instructions(): # This helps the user with instructions
             time.sleep(1.5)
             clear_terminal()
             exit()
-        elif player_choice in ['main', 'menu', 'm']:
+        elif player_choice in ['main', 'menu', 'm']: #If user's choice is in main, menu, or m then it will make them return to the main menu
             print("Play whenever you're ready!")
             time.sleep(1)
             clear_terminal()
@@ -154,14 +136,14 @@ def instructions(): # This helps the user with instructions
             time.sleep(1.5)
             clear_terminal()
             return main()
-        else:
-            print("sorry that's invalid, please press yes or no")
+        else: #Prompts the user to do a valid input
+            print("sorry that's invalid, please press yes/no or M to return to menu.......")
     
 def rps_game(): #This is the thing that handles the logic of RPS game using the constants and stuff
     terminal_gamer_score = 0 #Sets the player's score to zero every time
     jarvis_score = 0 #Sets clanker score to zero everytime
 
-    print(""" 
+    print("""  
 ██████████████████████████████████████████████████████████████████████████████████████▀███████████████████████████
 █▄─▄▄▀█▄─▄▄─█─▄▄▄▄███▀▀▀▀▀████─▄─▄─█▄─▄▄─█▄─▄▄▀█▄─▀█▀─▄█▄─▄█▄─▀█▄─▄██▀▄─██▄─▄█████─▄▄▄▄██▀▄─██▄─▀█▀─▄█▄─▄▄─█▄─▄▄▀█
 ██─▄─▄██─▄▄▄█▄▄▄▄─██████████████─████─▄█▀██─▄─▄██─█▄█─███─███─█▄▀─███─▀─███─██▀███─██▄─██─▀─███─█▄█─███─▄█▀██─▄─▄█
@@ -169,18 +151,18 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
 ███████████████████████████████████████████████████
 █▄─█─▄█─▄▄▄▄█████▄─▄██▀▄─██▄─▄▄▀█▄─█─▄█▄─▄█─▄▄▄▄█░█
 ██▄▀▄██▄▄▄▄─███─▄█─███─▀─███─▄─▄██▄▀▄███─██▄▄▄▄─█▄█
-▀▀▀▄▀▀▀▄▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▀▄▄▀▄▄▀▄▄▀▀▀▄▀▀▀▄▄▄▀▄▄▄▄▄▀▄▀ """)
-    print(f"\n Welcome to rock, paper, scissors stadium! It is first to {GAMEROUNDS}! If you beat Jarvis then you are smarter than Iron Man!")
+▀▀▀▄▀▀▀▄▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▀▄▄▀▄▄▀▄▄▀▀▀▄▀▀▀▄▄▄▀▄▄▄▄▄▀▄▀ """) # Greets user with the RPS - TERMINAL GAMER VS JARVIS using fancy text!
+    print(f"\n Welcome to rock, paper, scissors stadium! It is first to {GAMEROUNDS}! If you beat Jarvis then you are smarter than Iron Man!") # Shows the user the amount of rounds played to win
     
     while terminal_gamer_score < GAMEROUNDS and jarvis_score < GAMEROUNDS: #Wraps the whole game into a while loop so the game can keep going until it reaches GAMEROUNDS
         player_move = input(" \n Hey, choose r for rock, p for paper, s for scissors:     ").lower().strip()
         player_move = cleaned_input(player_move)
 
-        if player_move in MOVE_CONDITIONS:
+        if player_move in MOVE_CONDITIONS: #If player move is in the MOVE_CONDITIONS constant, then it will register as a valid input
             player_move = MOVE_CONDITIONS[player_move]
 
         else:
-            print("\n          Nah bro, choose a move that is real")
+            print("\n          Nah bro, choose a move that is real") #Prompts the user to please pick a valid input then clears terminal to redo the loop
             time.sleep(1.5)
             print("          \n            \n       Try Again......")
             time.sleep(1.5)
@@ -201,7 +183,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
             time.sleep(1.5)
             clear_terminal()
 
-        elif WIN_RULES[player_move] == jarvis_move: # If the player does a move according to constant WIN_RULES and is part of the scenarios in WIN_RULES then they score a point against the clanker
+        elif WIN_RULES[player_move] == jarvis_move: # If the player does a move according to constant WIN_RULES and is part of the scenarios in WIN_RULES then they score a point against Jarvis
             print("\n Hey, you won this round, a few more to go! :)")
             terminal_gamer_score += 1
             time.sleep(1.5)
@@ -217,7 +199,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
             time.sleep(1.5)
             clear_terminal()
 
-        print(f"\n ============= Player has {terminal_gamer_score} points - Jarvis has {jarvis_score} points =============") # Shows the player what their score and the clanker score is
+        print(f"\n ============= Player has {terminal_gamer_score} points - Jarvis has {jarvis_score} points =============") # Shows the player what their score and Jarvis' score is
 
     if terminal_gamer_score == GAMEROUNDS: #If the player reaches the GAMEROUNDS, then the while loop is finished and displays the victory message
         print("\n Hey you did it! You beat Jarvis! :)")
@@ -250,14 +232,14 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         print("\n Sorry, that's invalid please pick a valid option")
     
 def main(): #This is the backbone of my entire RPS game without it, I would be cooked
-    while True:
-        welcome_text()
-        greeting_text()
+    while True: # Wraps everything in a loop
+        welcome_text() #Greets user with welcome text function
+        greeting_text() # Greets user with the greeting text function
     
-        game_choice = input("\n Welcome dear player, do you want to play the game? (yes/no) or press I for instructions!:   ").lower().strip()
+        game_choice = input("\n Welcome dear player, do you want to play the game? (yes/no) or press I for instructions!:   ").lower().strip() # Prompts the user to press yes/no to start or leave game and pressing 'I' will lead to instructions
         game_choice = cleaned_input(game_choice)
 
-        if game_choice in ["yes", "y"]:
+        if game_choice in ["yes", "y"]: #If the user presses y or types yes then it will load the game
             print("\n               \n     Let's get ready to rumble!!!!!")
             time.sleep(1)
             clear_terminal()
@@ -265,7 +247,7 @@ def main(): #This is the backbone of my entire RPS game without it, I would be c
             time.sleep(1.5)
             clear_terminal()
             rps_game()
-        elif game_choice in ["no", "n"]:
+        elif game_choice in ["no", "n"]: #If the user presses n or types no then it will quit the game
             print("\n oh sad...... See you next time :(")
             time.sleep(1.5)
             clear_terminal()
@@ -273,7 +255,7 @@ def main(): #This is the backbone of my entire RPS game without it, I would be c
             time.sleep(1.5)
             clear_terminal()
             break
-        elif game_choice in ["instructions", "i",]:
+        elif game_choice in ["instructions", "i",]: #If the user presses I then it will allow them to view instructions
             print("See ya in game!")
             time.sleep(1)
             clear_terminal()
@@ -283,10 +265,9 @@ def main(): #This is the backbone of my entire RPS game without it, I would be c
             instructions()
 
         else:
-            print("\n Nah that's invalid..... Please use yes or no or whatever works I guess. ")
+            print("\n Nah that's invalid..... Please use yes or no or whatever works I guess. ") #Prompts the user to do a valid option
             time.sleep(2)
             clear_terminal()
 
 #main loop that starts the game otherwise I'd be cooked
-
-main()
+main() 

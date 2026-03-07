@@ -23,4 +23,5 @@ Versions started cluttering up space so I decided to move them all here :0
 #Version 16: Another teeny tiny update
 #Version 17: Attempt of making the move rock available with r (For rock etc) Les go I did it!
 #Version 18: Added a victory and losing animation
+#Version 19: Added a few comments to parts I haven't explained how they work yet and a few renames
 # ===================== Versions End ===================== #
