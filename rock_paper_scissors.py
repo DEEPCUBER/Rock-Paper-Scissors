@@ -45,8 +45,11 @@ WIN_RULES = {    #This constant is for determining the winning rules which makes
 
 MOVE_CONDITIONS = { #Makes it so that the player can quick press the letter that corresponds to the move (LES GO I FINALLY FIGURED IT OUT)
     "r": ROCK,
+    "rock": ROCK,
     "p": PAPER,
-    "s": SCISSORS
+    "paper": PAPER,
+    "s": SCISSORS,
+    "scissors": SCISSORS
 }
 
 POINTSPERWIN = 1 #This constant is for determining the amount of points per win and is modular
@@ -136,18 +139,18 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         player_move = input(" \n Hey, choose r for rock, p for paper, s for scissors:     ").lower().strip()
         player_move = cleaned_input(player_move)
 
-        #if player_move in MOVE_CONDITIONS:
-            #player_move = MOVE_CONDITIONS[player_move]
+        if player_move in MOVE_CONDITIONS:
+            player_move = MOVE_CONDITIONS[player_move]
 
-        #else:
-           # print("\n          Nah bro, choose a move that is real")
-           # time.sleep(1.5)
-           # print("          \n            \n       Try Again......")
-           # time.sleep(1.5)
-           # clear_terminal()
-           # continue
+        else:
+            print("\n          Nah bro, choose a move that is real")
+            time.sleep(1.5)
+            print("          \n            \n       Try Again......")
+            time.sleep(1.5)
+            clear_terminal()
+            continue
 
-        if player_move not in MOVES: # Asks player to choose a valid move in constant MOVES
+        if player_move not in MOVES and player_move not in MOVE_CONDITIONS: # Asks player to choose a valid move in constant MOVES
             print("\n Nah bro, choose a move that is real")
             continue
 
