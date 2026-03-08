@@ -28,6 +28,8 @@
 #Version 18: Added a victory and losing animation
 #Version 19: Added a few comments to parts I haven't explained how they work yet and a few renames
 #Version 20: Added versions back since it looks weird on github
+# ==== 8th March, 2026 Versions ==== # 
+#Small update
 
 
 #Modules - These help with stuff that is important to this game especially helpful stuff
@@ -256,6 +258,9 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
         return False
     else:
         print("\n Sorry, that's invalid please pick a valid option")
+        time.sleep(2)
+        clear_terminal()
+        time.sleep(1)
     
 def main(): #This is the backbone of my entire RPS game without it, I would be cooked
     while True: # Wraps everything in a loop
