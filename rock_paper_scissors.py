@@ -28,7 +28,8 @@
 #Version 18: Added a victory and losing animation
 #Version 19: Added a few comments to parts I haven't explained how they work yet and a few renames
 #Version 20: Added versions back since it looks weird on github
-# ==== 8th March, 2026 Versions ==== # 
+# ==== 11th March, 2026 Versions ==== # 
+#Version 21: Changed the coding of the animations a bit to make it better using a list
 #Small update
 
 
@@ -76,41 +77,18 @@ def cleaned_input(user_input:str) -> str: #Cleans input of a user #Borrowed from
 #Animation Functions
 
 def victory_animation(): #Displays an 'animation' of the player winning the game
-    print("\nYOU WON!")
-    time.sleep(0.5)
-    clear_terminal()
-    print("\nyou won!")
-    time.sleep(0.5)
-    clear_terminal()
-    print("\nYOU WON!")
-    time.sleep(0.5)
-    clear_terminal()
-    print("\nyou won!")
-    time.sleep(0.5)
-    clear_terminal()
-    print("\nYOU WON!")
-    time.sleep(0.5)
-    clear_terminal() 
-    print("\nyou won!") 
+    winning = ["\n YOU WON!", "\n you won! :)"]
+    for i in range(6):
+        print(winning[i % 2])
+        time.sleep(0.5)
+        clear_terminal()
  
 def loss_animation(): #Displays an 'animation' of the player losing the game
-    print("\nYOU LOST :|")
-    time.sleep(0.5)
-    clear_terminal()
-    print("\nyou lost :(")
-    time.sleep(0.5)
-    clear_terminal()
-    print("\nYOU LOST :|")
-    time.sleep(0.5)
-    clear_terminal()
-    print("\nyou lost :(")
-    time.sleep(0.5)
-    clear_terminal()
-    print("\nYOU LOST :|")
-    time.sleep(0.5)
-    clear_terminal()  
-    print("\nyou lost :(") 
-
+    losing = ["\n YOU LOST :(", "you lost :("]
+    for i in range(6):
+        print(losing[i % 2])
+        time.sleep(0.5)
+        clear_terminal()
 
 #Main functions
 
@@ -197,10 +175,6 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
             clear_terminal()
             continue
 
-        if player_move not in MOVES and player_move not in MOVE_CONDITIONS: # Asks player to choose a valid move in constant MOVES
-            print("\n Nah bro, choose a move that is real")
-            continue
-
         jarvis_move = random.choice(MOVES) # This is how the terminal generates moves using the random module
         print(f" \n Jarvis chose:  {jarvis_move}")
 
@@ -213,7 +187,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
 
         elif WIN_RULES[player_move] == jarvis_move: # If the player does a move according to constant WIN_RULES and is part of the scenarios in WIN_RULES then they score a point against Jarvis
             print("\n Hey, you won this round, a few more to go! :)")
-            terminal_gamer_score += 1
+            terminal_gamer_score += POINTSPERWIN
             time.sleep(1.5)
             print("\n Loading next round...........")
             time.sleep(1.5)
@@ -221,7 +195,7 @@ def rps_game(): #This is the thing that handles the logic of RPS game using the 
 
         else:
             print("\n Jarvis won this round ;)") # The opposite of the player winning according to comment on line 123
-            jarvis_score += 1 
+            jarvis_score += POINTSPERWIN
             time.sleep(1.5)
             print("\n Loading next round..........")
             time.sleep(1.5)
